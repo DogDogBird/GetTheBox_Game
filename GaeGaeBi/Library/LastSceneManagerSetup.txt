@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scene/GaeGaeBiBall.unity
+  isLoaded: 1
+  isActive: 1
