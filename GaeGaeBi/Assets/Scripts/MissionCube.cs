@@ -21,18 +21,19 @@ public class MissionCube : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
-        {
-            ScoreManager.Instance.IncrementMissionCubeCnt();
+        {           
             //gameObject.SetActive(false);
-            StartCoroutine(MissionCubeSound());
-            uiController.MissionCubeUI(ScoreManager.Instance.getMissionCubeCnt());
+            StartCoroutine(GetItem());         
         }
     }
 
-    IEnumerator MissionCubeSound()
+    IEnumerator GetItem()
     {
-        audioSource.PlayOneShot(audioSource.clip, 1);
-        yield return new WaitWhile(() => audioSource.isPlaying);
-        Destroy(gameObject);
+        AudioManager.Instance.MissionCubeColliderSoundOn();
+        //audioSource.PlayOneShot(audioSource.clip, 1);
+        yield return null;
+        ScoreManager.Instance.IncrementMissionCubeCnt();
+        DestroyImmediate(gameObject);
+        uiController.MissionCubeUI(ScoreManager.Instance.getMissionCubeCnt());
     }
 }

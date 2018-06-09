@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
+    AudioSource[] sounds;
     AudioSource audioSource;
+    AudioSource missioncube;
     // Use this for initialization
 
     private static AudioManager instance;
@@ -21,16 +23,22 @@ public class AudioManager : MonoBehaviour {
     }
 
 	void Start () {
-        audioSource = GetComponent<AudioSource>();
+        sounds = GetComponents<AudioSource>();
+        audioSource = sounds[0];
+        missioncube = sounds[1];
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+		    
 	}
 
     public void BackgroundSoundOff()
     {
         audioSource.Stop();
+    }
+    public void MissionCubeColliderSoundOn()
+    {
+        missioncube.Play();
     }
 }

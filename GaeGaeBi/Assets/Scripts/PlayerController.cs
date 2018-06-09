@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour {
     Rigidbody myRigidbody;
     Vector3 velocity;
     public GameObject target;
+    public Grenade grenade;
+    public Transform grenadeSpawner;
+
 	// Use this for initialization
 	void Start () {
         myRigidbody = GetComponent<Rigidbody>();
@@ -21,5 +24,26 @@ public class PlayerController : MonoBehaviour {
     public void FixedUpdate()
     {
         myRigidbody.MovePosition(myRigidbody.position + velocity * Time.deltaTime);
+        
+    }
+    public void Update()
+    {
+        throwGrenade();
+    }
+
+    public void throwGrenade()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+            //Debug.Log("throwGrenade");
+            //Instantiate(grenadePrefab, grenadeSpawner);
+        }
+    }
+
+    public void Shoot()
+    {
+        Grenade newGrenade = Instantiate(grenade, grenadeSpawner.position, grenadeSpawner.rotation) as Grenade;
+        //newGrenade.setSpeed(10);
     }
 }
